@@ -1,0 +1,24 @@
+name: Checkout Workflow Demo
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  checkout-demo:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Checkout the repository and use the `dev` branch
+      - name: Checkout dev branch
+        uses: actions/checkout@v4
+        with:
+          repository: s1ntaxe770r/spacelift-checkout-demo
+          ref: dev
+          sparse-checkout: |
+            surprise.txt
+          sparse-checkout-cone-mode: false
+
+      # Step 2: Display the contents of `surprise.txt`
+      - name: Show surprise.txt content
+        run: cat surprise.txt
